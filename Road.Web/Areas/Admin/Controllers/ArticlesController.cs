@@ -59,12 +59,20 @@ namespace Road.Web.Areas.Admin.Controllers
                 #region Upload Image
                 if (ArticleImage != null)
                 {
+                    // Saving Temp Image
                     var newFileName = Guid.NewGuid() + Path.GetExtension(ArticleImage.FileName);
-                    ArticleImage.SaveAs(Server.MapPath("/Files/ArticleImages/Image/" + newFileName));
+                    ArticleImage.SaveAs(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName));
+                    // Resize Image
+                    ImageResizer image = new ImageResizer(840, 385);
+                    image.Resize(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName),
+                        Server.MapPath("/Files/ArticleImages/Image/" + newFileName));
 
-                    ImageResizer thumb = new ImageResizer();
-                    thumb.Resize(Server.MapPath("/Files/ArticleImages/Image/" + newFileName),
+                    ImageResizer thumb = new ImageResizer(370,215);
+                    thumb.Resize(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName),
                         Server.MapPath("/Files/ArticleImages/Thumb/" + newFileName));
+
+                    // Deleting Temp Image
+                    System.IO.File.Delete(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName));
 
                     article.Image = newFileName;
                 }
@@ -114,12 +122,20 @@ namespace Road.Web.Areas.Admin.Controllers
                     if (System.IO.File.Exists(Server.MapPath("/Files/ArticleImages/Thumb/" + article.Image)))
                         System.IO.File.Delete(Server.MapPath("/Files/ArticleImages/Thumb/" + article.Image));
 
+                    // Saving Temp Image
                     var newFileName = Guid.NewGuid() + Path.GetExtension(ArticleImage.FileName);
-                    ArticleImage.SaveAs(Server.MapPath("/Files/ArticleImages/Image/" + newFileName));
+                    ArticleImage.SaveAs(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName));
+                    // Resize Image
+                    ImageResizer image = new ImageResizer(840, 385);
+                    image.Resize(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName),
+                        Server.MapPath("/Files/ArticleImages/Image/" + newFileName));
 
-                    ImageResizer thumb = new ImageResizer();
-                    thumb.Resize(Server.MapPath("/Files/ArticleImages/Image/" + newFileName), Server.MapPath("/Files/ArticleImages/Thumb/" + newFileName));
-                    article.Image = newFileName;
+                    ImageResizer thumb = new ImageResizer(370, 215);
+                    thumb.Resize(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName),
+                        Server.MapPath("/Files/ArticleImages/Thumb/" + newFileName));
+
+                    // Deleting Temp Image
+                    System.IO.File.Delete(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName));
                 }
                 #endregion
 

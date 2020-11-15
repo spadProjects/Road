@@ -1,7 +1,10 @@
 ﻿using System;
+using System.IO;
 using System.Net;
+using System.Web;
 using System.Web.Mvc;
 using Road.Core.Models;
+using Road.Infrastructure.Helpers;
 using Road.Infrastructure.Repositories;
 
 namespace Road.Web.Areas.Admin.Controllers
@@ -24,10 +27,27 @@ namespace Road.Web.Areas.Admin.Controllers
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Testimonial testimonial)
+        public ActionResult Create(Testimonial testimonial, HttpPostedFileBase TestimonialImage)
         {
             if (ModelState.IsValid)
             {
+                #region Upload Image
+                if (TestimonialImage != null)
+                {
+                    // Saving Temp Image
+                    var newFileName = Guid.NewGuid() + Path.GetExtension(TestimonialImage.FileName);
+                    TestimonialImage.SaveAs(Server.MapPath("/Files/TestimonialImages/Temp/" + newFileName));
+                    // Resize Image
+                    ImageResizer image = new ImageResizer(400, 400);
+                    image.Resize(Server.MapPath("/Files/TestimonialImages/Temp/" + newFileName),
+                        Server.MapPath("/Files/TestimonialImages/" + newFileName));
+
+                    // Deleting Temp Image
+                    System.IO.File.Delete(Server.MapPath("/Files/TestimonialImages/Temp/" + newFileName));
+
+                    testimonial.Image = newFileName;
+                }
+                #endregion
                 _repo.Add(testimonial);
                 return RedirectToAction("Index");
             }
@@ -51,10 +71,29 @@ namespace Road.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Testimonial testimonial)
+        public ActionResult Edit(Testimonial testimonial, HttpPostedFileBase TestimonialImage)
         {
             if (ModelState.IsValid)
             {
+                #region Upload Image
+                if (TestimonialImage != null)
+                {
+                    if (System.IO.File.Exists(Server.MapPath("/Files/TestimonialImages/" + testimonial.Image)))
+                        System.IO.File.Delete(Server.MapPath("/Files/TestimonialImages/" + testimonial.Image));
+
+                    // Saving Temp Image
+                    var newFileName = Guid.NewGuid() + Path.GetExtension(TestimonialImage.FileName);
+                    TestimonialImage.SaveAs(Server.MapPath("/Files/TestimonialImages/Temp/" + newFileName));
+                    // Resize Image
+                    ImageResizer image = new ImageResizer(400, 400);
+                    image.Resize(Server.MapPath("/Files/TestimonialImages/Temp/" + newFileName),
+                        Server.MapPath("/Files/TestimonialImages/" + newFileName));
+
+                    // Deleting Temp Image
+                    System.IO.File.Delete(Server.MapPath("/Files/TestimonialImages/Temp/" + newFileName));
+                    testimonial.Image = newFileName;
+                }
+                #endregion
                 _repo.Update(testimonial);
                 return RedirectToAction("Index");
             }

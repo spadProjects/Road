@@ -1,0 +1,56 @@
+﻿@model List<Road.Core.Models.Testimonial>
+<div class="row-testimonials bg-light-snow">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="themesflat-spacer clearfix" data-desktop="60" data-mobile="60" data-smobile="60"></div>
+                <div class="themesflat-headings style-1 font-hind text-center clearfix">
+                    <h2 class="heading">@ViewBag.Content.Title</h2>
+                    <div class="sep has-icon width-125 clearfix">
+                        <div class="sep-icon">
+                            <span class="sep-icon-before sep-center sep-solid"></span>
+                            <span class="icon-wrap"><i class="autora-icon-build"></i></span>
+                            <span class="sep-icon-after sep-center sep-solid"></span>
+                        </div>
+                    </div>
+                    <p class="sub-heading">@ViewBag.Content.ShortDescription</p>
+                </div>
+                <div class="themesflat-spacer clearfix" data-desktop="46" data-mobile="35" data-smobile="35"></div>
+                <div class="themesflat-carousel-box has-bullets bullet-circle clearfix" data-gap="30" data-column="3" data-column2="2" data-column3="1" data-auto="true">
+                    <div class="owl-carousel owl-theme">
+                        @foreach (var item in Model)
+                        {
+                            <div class="themesflat-testimonials style-2 align-center clearfix">
+                                <div class="testimonial-item">
+                                    <div class="inner">
+                                        <div class="thumb">
+                                            <img src="/Files/TestimonialImages/@item.Image" alt="@item.Title">
+                                        </div>
+                                        <blockquote class="text">
+                                            <div class="name-pos clearfix">
+                                                <h6 class="name">@item.Title</h6>
+                                                <span class="position">@item.Company</span>
+                                            </div>
+                                            <p>@item.Description</p>
+                                            <div class="list-star">
+                                                @for (int i = 0; i < item.Rate; i++)
+                                                {
+                                                    if (i < 5)
+                                                    {
+                                                        <i class="ion-star"></i>
+                                                    }
+                                                }
+                                            </div>
+                                        </blockquote>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div><!-- /.themesflat-carousel-box -->
+                <div class="themesflat-spacer clearfix" data-desktop="81" data-mobile="60" data-smobile="60"></div>
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div>
+

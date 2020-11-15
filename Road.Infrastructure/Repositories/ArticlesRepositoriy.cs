@@ -81,6 +81,10 @@ namespace Road.Infrastructure.Repositories
             _context.SaveChanges();
             _logger.LogEvent(headLine.GetType().Name, headLine.Id, "Add");
         }
+        public List<Article> GetByCategory(int categoryId)
+        {
+            return _context.Articles.Where(a => a.IsDeleted == false && a.ArticleCategoryId == categoryId).Include(a => a.User).Include(a => a.ArticleCategory).OrderBy(a => a.InsertDate).ToList();
+        }
         //public Article DeleteArticle(int articleId)
         //{
         //    var article = _context.Articles.Find(articleId);

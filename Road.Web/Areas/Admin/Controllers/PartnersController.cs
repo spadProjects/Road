@@ -5,6 +5,7 @@ using Road.Core.Models;
 using Road.Infrastructure.Repositories;
 using System.Web;
 using System.IO;
+using Road.Infrastructure.Helpers;
 
 namespace Road.Web.Areas.Admin.Controllers
 {
@@ -33,8 +34,17 @@ namespace Road.Web.Areas.Admin.Controllers
                 #region Upload Image
                 if (PartnerImage != null)
                 {
+                    // Saving Temp Image
                     var newFileName = Guid.NewGuid() + Path.GetExtension(PartnerImage.FileName);
-                    PartnerImage.SaveAs(Server.MapPath("/Files/PartnersImages/" + newFileName));
+                    PartnerImage.SaveAs(Server.MapPath("/Files/PartnersImages/Temp/" + newFileName));
+                    // Resize Image
+                    ImageResizer image = new ImageResizer(400, 200);
+                    image.Resize(Server.MapPath("/Files/PartnersImages/Temp/" + newFileName),
+                        Server.MapPath("/Files/PartnersImages/" + newFileName));
+
+                    // Deleting Temp Image
+                    System.IO.File.Delete(Server.MapPath("/Files/PartnersImages/Temp/" + newFileName));
+
                     partner.Image = newFileName;
                 }
                 #endregion
@@ -72,8 +82,16 @@ namespace Road.Web.Areas.Admin.Controllers
                     if (System.IO.File.Exists(Server.MapPath("/Files/PartnersImages/" + partner.Image)))
                         System.IO.File.Delete(Server.MapPath("/Files/PartnersImages/" + partner.Image));
 
+                    // Saving Temp Image
                     var newFileName = Guid.NewGuid() + Path.GetExtension(PartnerImage.FileName);
-                    PartnerImage.SaveAs(Server.MapPath("/Files/PartnersImages/" + newFileName));
+                    PartnerImage.SaveAs(Server.MapPath("/Files/PartnersImages/Temp/" + newFileName));
+                    // Resize Image
+                    ImageResizer image = new ImageResizer(400, 200);
+                    image.Resize(Server.MapPath("/Files/PartnersImages/Temp/" + newFileName),
+                        Server.MapPath("/Files/PartnersImages/" + newFileName));
+
+                    // Deleting Temp Image
+                    System.IO.File.Delete(Server.MapPath("/Files/PartnersImages/Temp/" + newFileName));
                     partner.Image = newFileName;
                 }
                 #endregion

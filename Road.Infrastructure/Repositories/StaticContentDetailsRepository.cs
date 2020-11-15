@@ -29,9 +29,17 @@ namespace Road.Infrastructure.Repositories
         {
             return _context.StaticContentDetails.Where(e=>e.IsDeleted == false).Include(a => a.StaticContentType).ToList();
         }
+        public List<StaticContentDetail> GetContentByTypeId(int id)
+        {
+            return _context.StaticContentDetails.Where(e => e.IsDeleted == false && e.StaticContentTypeId == id).Include(a => a.StaticContentType).ToList();
+        }
         public List<StaticContentType> GetStaticContentTypes()
         {
             return _context.StaticContentTypes.Where(e=>e.IsDeleted == false).ToList();
+        }
+        public StaticContentType GetContentType(int contentTypeId)
+        {
+            return _context.StaticContentTypes.FirstOrDefault(e => e.IsDeleted == false && e.Id == contentTypeId);
         }
     }
 }

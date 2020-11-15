@@ -1,0 +1,49 @@
+﻿@model List<Road.Core.Models.StaticContentDetail>
+    <div class="row-services">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="themesflat-spacer clearfix" data-desktop="60" data-mobile="60" data-smobile="60"></div>
+                    <div class="themesflat-headings style-1 text-center clearfix">
+                        <h2 class="heading">@ViewBag.ContentType</h2>
+                        <div class="sep has-icon width-125 clearfix">
+                            <div class="sep-icon">
+                                <span class="sep-icon-before sep-center sep-solid"></span>
+                                <span class="icon-wrap"><i class="autora-icon-build"></i></span>
+                                <span class="sep-icon-after sep-center sep-solid"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="themesflat-spacer clearfix" data-desktop="27" data-mobile="35" data-smobile="35"></div>
+                    <div class="themesflat-carousel-box has-arrows arrow-center offset-v-111 offset-h-21 arrow-circle arrow-style-2 data-effect clearfix" data-gap="30" data-column="3" data-column2="2" data-column3="1" data-auto="true">
+                        <div class="owl-carousel owl-theme">
+                            @foreach (var item in Model)
+                            {
+                                <div class="themesflat-image-box style-2 clearfix">
+                                    <div class="image-box-item">
+                                        <div class="inner">
+                                            <div class="thumb data-effect-item">
+                                                <img src="/Files/StaticContentImages/Image/@item.Image" alt="@item.Title">
+                                                <div class="overlay-effect bg-color-accent"></div>
+                                            </div>
+                                            <div class="text-wrap">
+                                                <h5 class="heading"><a href="#">@item.Title</a></h5>
+                                                <p>@item.ShortDescription</p>
+                                                @if (item.Link != null)
+                                                {
+                                                    <div class="elm-readmore">
+                                                        <a href="@item.Link">جزئیات</a>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                    <div class="themesflat-spacer clearfix" data-desktop="45" data-mobile="60" data-smobile="60"></div>
+                </div><!-- /.col-md-12 -->
+            </div><!-- /.row -->
+        </div><!-- /.container -->
+    </div>

@@ -1,0 +1,47 @@
+﻿@using Road.Core.Utility
+@model List<Road.Core.Models.StaticContentDetail>
+@{
+    var address = Model.FirstOrDefault(s => s.Id == (int)StaticContents.Address);
+    var phone = Model.FirstOrDefault(s => s.Id == (int)StaticContents.Phone);
+    var facebook = Model.FirstOrDefault(s => s.Id == (int)StaticContents.Facebook);
+    var instagram = Model.FirstOrDefault(s => s.Id == (int)StaticContents.Instagram);
+    var telegram = Model.FirstOrDefault(s => s.Id == (int)StaticContents.Telegram);
+}
+<div id="top-bar">
+    <div id="top-bar-inner" class="container">
+        <div class="top-bar-inner-wrap">
+            <div class="top-bar-content">
+                <div class="inner">
+                    @if (address != null)
+                    {
+                        <span class="address content">@address.ShortDescription</span>
+                    }
+                    @if (phone != null)
+                    {
+                        <span class="phone content">@phone.ShortDescription</span>
+                    }
+                </div>
+            </div><!-- /.top-bar-content -->
+
+            <div class="top-bar-socials">
+                <div class="inner">
+                    <span class="text">دنبال کردن ما:</span>
+                    <span class="icons">
+                        @if (facebook != null)
+                        {
+                            <a href="@facebook.Link"><i class="fa fa-facebook"></i></a>
+                        }
+                        @if (instagram != null)
+                        {
+                            <a href="@instagram.Link"><i class="fa fa-instagram"></i></a>
+                        }
+                        @if (telegram != null)
+                        {
+                            <a href="@telegram.Link"><i class="fa fa-telegram"></i></a>
+                        }
+                    </span>
+                </div>
+            </div><!-- /.top-bar-socials -->
+        </div>
+    </div>
+</div>

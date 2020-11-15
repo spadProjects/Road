@@ -37,15 +37,21 @@ namespace Road.Infrastructure.Helpers
                 TrimImage = false;
                 SaveFormat = ImageFormat.Jpeg;
             }
-
-            /// <summary>
-            /// Resizes the image from the source file according to the
-            /// current settings and saves the result to the targe file.
-            /// </summary>
-            /// <param name="source">Path containing image to resize</param>
-            /// <param name="target">Path to save resized image</param>
-            /// <returns>True if successful, false otherwise.</returns>
-            public bool Resize(string source, string target)
+            public ImageResizer(int x, int y)
+            {
+                MaxX = x;
+                MaxY = y;
+                TrimImage = false;
+                SaveFormat = ImageFormat.Jpeg;
+            }
+        /// <summary>
+        /// Resizes the image from the source file according to the
+        /// current settings and saves the result to the targe file.
+        /// </summary>
+        /// <param name="source">Path containing image to resize</param>
+        /// <param name="target">Path to save resized image</param>
+        /// <returns>True if successful, false otherwise.</returns>
+        public bool Resize(string source, string target)
             {
                 using (Image src = Image.FromFile(source, true))
                 {

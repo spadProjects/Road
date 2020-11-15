@@ -11,6 +11,11 @@ namespace Road.Core.Models
         [Display(Name = "عنوان")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         public string Title { get; set; }
+        [Display(Name = "شرکت")]
+        [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
+        public string Company { get; set; }
+        [Display(Name = "تصویر")]
+        public string Image { get; set; }
         [Display(Name = "توضیح")]
         [Required(ErrorMessage = "لطفا {0} را وارد کنید")]
         [DataType(DataType.MultilineText)]
