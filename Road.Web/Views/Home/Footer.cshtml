@@ -1,0 +1,96 @@
+﻿@using Road.Core.Utility
+@model List<Road.Core.Models.StaticContentDetail>
+@{
+    var address = Model.FirstOrDefault(s => s.Id == (int)StaticContents.Address);
+    var phone = Model.FirstOrDefault(s => s.Id == (int)StaticContents.Phone);
+    var email = Model.FirstOrDefault(s => s.Id == (int)StaticContents.Email);
+}
+<!-- Footer -->
+<footer id="footer" class="clearfix">
+    <div id="footer-widgets" class="container">
+        <div class="themesflat-row gutter-30">
+            <div class="col span_1_of_3">
+                <div class="widget widget_text">
+                    <div class="textwidget">
+                        <p>
+                            <img src="/Content/client/assets/img/logo-white@2x.png" alt="Image" width="170" height="34">
+                        </p>
+
+                        <p class="margin-bottom-15">@ViewBag.FooterText</p>
+
+                        <ul>
+                            <li>
+                                <div class="inner">
+                                    <span class="fa fa-map-marker"></span>
+                                    <span class="text">@address.ShortDescription</span>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div class="inner">
+                                    <span class="fa fa-phone"></span>
+                                    <span class="text">تلفن ما : @phone.ShortDescription</span>
+                                </div>
+                            </li>
+
+                            <li class="margin-top-7">
+                                <div class="inner">
+                                    <span class=" font-size-14 fa fa-envelope"></span>
+                                    <span class="text">@email.ShortDescription</span>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div><!-- /.widget_text -->
+                <div class="themesflat-spacer clearfix" data-desktop="0" data-mobile="0" data-smobile="35"></div>
+            </div><!-- /.col -->
+
+            <div class="col span_1_of_3">
+                <div class="themesflat-spacer clearfix" data-desktop="0" data-mobile="0" data-smobile="0"></div>
+
+                <div class="widget widget_lastest">
+                    <h2 class="widget-title"><span>پست های اخیر</span></h2>
+                    @Html.Action("LatestPosts", "Blog", new { take = 2 })
+                </div><!-- /.widget_lastest -->
+            </div><!-- /.col -->
+        </div><!-- /.themesflat-row -->
+    </div><!-- /#footer-widgets -->
+</footer><!-- /#footer -->
+<!-- Bottom -->
+<div id="bottom" class="clearfix has-spacer">
+    <div id="bottom-bar-inner" class="container">
+        <div class="bottom-bar-inner-wrap">
+            <div class="bottom-bar-content">
+                <div id="copyright">
+                    © <span class="text">طراحی شده توسط <a href="https:/spad.co" class="text-accent">اسپاد</a></span>
+                </div>
+            </div><!-- /.bottom-bar-content -->
+
+            <div class="bottom-bar-menu">
+                <ul class="bottom-nav">
+                    <li class="menu-item current-menu-item">
+                        <a href="index.html">صفحه اصلی</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="page-about.html">درباره ما</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="page-services.html">سرویس ها</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="page-projects.html">پروژه ها</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="page-testimonial.html">صفحات</a>
+                    </li>
+                    <li class="menu-item ">
+                        <a href="page-blog.html">بلاگ</a>
+                    </li>
+                    <li class="menu-item">
+                        <a href="page-contact.html">فرم تماس</a>
+                    </li>
+                </ul>
+            </div><!-- /.bottom-bar-menu -->
+        </div><!-- /.bottom-bar-inner-wrap -->
+    </div><!-- /#bottom-bar-inner -->
+</div><!-- /#bottom -->

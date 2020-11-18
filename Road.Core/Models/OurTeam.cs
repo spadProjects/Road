@@ -20,8 +20,8 @@ namespace Road.Core.Models
         public string Twitter { get; set; }
         [Display(Name = "لینک گوگل پلاس")]
         public string Google { get; set; }
-        [Display(Name = "لینک لینکدین")]
-        public string Linkedin { get; set; }
+        [Display(Name = "لینک اینستاگرام")]
+        public string Instagram { get; set; }
         public string InsertUser { get; set; }
         public DateTime? InsertDate { get; set; }
         public string UpdateUser { get; set; }

@@ -7,6 +7,7 @@ using Road.Infrastructure.Repositories;
 using Road.Core.Models;
 using System.Net;
 using System.IO;
+using Road.Infrastructure.Helpers;
 
 namespace Road.Web.Areas.Admin.Controllers
 {
@@ -39,8 +40,17 @@ namespace Road.Web.Areas.Admin.Controllers
                 #region Upload Image
                 if (Image != null)
                 {
+                    // Saving Temp Image
                     var newFileName = Guid.NewGuid() + Path.GetExtension(Image.FileName);
-                    Image.SaveAs(Server.MapPath("/Files/ProjectImages/ProjectGallery/" + newFileName));
+                    Image.SaveAs(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName));
+                    // Resize Image
+                    ImageResizer image = new ImageResizer(900, 500,true);
+                    image.Resize(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName),
+                        Server.MapPath("//Files/ProjectImages/ProjectGallery/" + newFileName));
+
+                    // Deleting Temp Image
+                    System.IO.File.Delete(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName));
+
                     projectGallery.Image = newFileName;
                 }
                 #endregion
@@ -76,9 +86,17 @@ namespace Road.Web.Areas.Admin.Controllers
                 {
                     if (System.IO.File.Exists(Server.MapPath("/Files/ProjectImages/ProjectGallery/" + projectGallery.Image)))
                         System.IO.File.Delete(Server.MapPath("/Files/ProjectImages/ProjectGallery/" + projectGallery.Image));
-
+                    // Saving Temp Image
                     var newFileName = Guid.NewGuid() + Path.GetExtension(Image.FileName);
-                    Image.SaveAs(Server.MapPath("/Files/ProjectImages/ProjectGallery/" + newFileName));
+                    Image.SaveAs(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName));
+                    // Resize Image
+                    ImageResizer image = new ImageResizer(900, 500,true);
+                    image.Resize(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName),
+                        Server.MapPath("//Files/ProjectImages/ProjectGallery/" + newFileName));
+
+                    // Deleting Temp Image
+                    System.IO.File.Delete(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName));
+
                     projectGallery.Image = newFileName;
                 }
                 #endregion

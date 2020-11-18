@@ -1,0 +1,21 @@
+﻿@model Road.Core.Models.StaticContentDetail
+@{
+    ViewBag.Title = Model.Title;
+}
+<div id="content-wrap" class="container">
+    <div id="" class="">
+        <div id="inner-content" class="">
+            <div class="themesflat-spacer clearfix" data-desktop="61" data-mobile="60" data-smobile="60" style="height:61px"></div>
+            <div class="themesflat-headings style-2 clearfix">
+                <h2 class="heading">@Model.Title</h2>
+                <div class="sep has-width w80 accent-bg clearfix"></div>
+                <p class="sub-heading line-height-24 text-777 margin-top-28 margin-right-12">
+                    @Model.ShortDescription
+                </p>
+                <p>@Html.Raw(Model.Description)</p>
+            </div>
+            <div class="themesflat-spacer clearfix" data-desktop="80" data-mobile="60" data-smobile="60" style="height:80px"></div>
+        </div><!-- /#inner-content -->
+    </div><!-- /#site-content -->
+    <!-- /#sidebar -->
+</div>

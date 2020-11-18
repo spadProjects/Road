@@ -1,0 +1,19 @@
+﻿@model List<Road.Web.ViewModels.LatestArticleViewModel>
+<ul class="lastest-posts data-effect clearfix">
+    @foreach (var item in Model)
+    {
+        <li class="clearfix">
+            <div class="thumb data-effect-item has-effect-icon ">
+                <img src="/Files/ArticleImages/Thumb/@item.Image" alt="@item.Title">
+                <div class="overlay-effect bg-color-2"></div>
+                <div class="elm-link">
+                    <a href="/Blog/Post/@item.Id/@item.Title.Replace(" ","-")" class="icon-2"></a>
+                </div>
+            </div>
+            <div class="text">
+                <h3><a href="/Blog/Post/@item.Id/@item.Title.Replace(" ","-")">@item.Title</a></h3>
+                <span class="post-date"><span class="entry-date">@item.AddedDate</span></span>
+            </div>
+        </li>
+    }
+</ul>

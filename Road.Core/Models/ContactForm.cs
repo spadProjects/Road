@@ -22,10 +22,9 @@ namespace Road.Core.Models
         [EmailAddress(ErrorMessage = "{0} وارد شده معتبر نیست")]
         public string Email { get; set; }
         [Display(Name = "پیام")]
+        [Required(ErrorMessage = "لطفا {0} خود را وارد کنید")]
         [DataType(DataType.MultilineText)]
         public string Message { get; set; }
-        public int ServiceId { get; set; }
-        public Service Service { get; set; }
         public string InsertUser { get; set; }
         public DateTime? InsertDate { get; set; }
         public string UpdateUser { get; set; }

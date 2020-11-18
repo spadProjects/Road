@@ -1,0 +1,52 @@
+﻿@model List<Road.Core.Models.ArticleCategory>
+    <header id="site-header">
+        <div id="site-header-inner" class="container">
+            <div class="wrap-inner clearfix">
+                <div id="site-logo" class="clearfix">
+                    <div id="site-log-inner">
+                        <a href="index.html" rel="home" class="main-logo">
+                            <img src="/Content/client/assets/img/logo-white-small.png" alt="Faradid Kerman" width="169" height="39" data-retina="assets/img/logo-white-small@2x.png" data-width="169" data-height="39">
+                        </a>
+                    </div>
+                </div><!-- /#site-logo -->
+
+                <div class="mobile-button">
+                    <span></span>
+                </div><!-- /.mobile-button -->
+
+                <nav id="main-nav" class="main-nav">
+                    <ul id="menu-primary-menu" class="menu">
+                        <li class="menu-item menu-item-has-children">
+                            <a href="/">صفحه اصلی</a>
+                        </li>
+                        <li class="menu-item menu-item-has-children">
+                            <a href="/Blog">بلاگ</a>
+                            <ul class="sub-menu right-sub-menu">
+                                @foreach (var item in Model)
+                                {
+                                    <li class="menu-item"><a href="/Blog/@item.Id/@item.Title.Replace(" ", "-")">@item.Title</a></li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="menu-item menu-item-has-children">
+                            <a href="/AboutFaradid/34/تاریخچه">تاریخچه</a>
+                        </li>
+                        <li class="menu-item menu-item-has-children">
+                            <a href="/AboutFaradid/33/چشم-انداز">چشم انداز</a>
+                        </li>
+                        <li class="menu-item menu-item-has-children">
+                            <a href="/Projects">پروژه ها</a>
+                        </li>
+                        <li class="menu-item menu-item-has-children">
+                            <a href="/ContactUs">تماس با ما</a>
+                        </li>
+                        <li class="menu-item menu-item-has-children">
+                            <a href="/AboutUs">درباره ما</a>
+                        </li>
+                    </ul>
+                </nav><!-- /#main-nav -->
+
+
+            </div><!-- /.wrap-inner -->
+        </div><!-- /#site-header-inner -->
+    </header><!-- /#site-header -->

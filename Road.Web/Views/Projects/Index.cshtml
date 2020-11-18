@@ -1,0 +1,45 @@
+﻿@model Road.Web.ViewModels.ProjectSectionViewModel
+@{
+    ViewBag.Title = "پروژه های فرادید";
+}
+<!-- PROJECT -->
+<div class="row-project clearfix">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="themesflat-spacer clearfix" data-desktop="60" data-mobile="60" data-smobile="60"></div>
+                <ul class="themesflat-filter style-1 clearfix">
+                    <li class="active"><a href="#" data-filter="*">همه</a></li>
+                    @foreach (var item in Model.ProjectTypes)
+                    {
+                        <li><a href="#" data-filter="#projectType_@(item.Id)">@item.Title</a></li>
+                    }
+                </ul>
+                <div class="themesflat-spacer clearfix" data-desktop="40" data-mobile="35" data-smobile="35"></div>
+                <div class="themesflat-project style-2 isotope-project has-margin mg15 data-effect clearfix">
+                    @foreach (var item in Model.Projects)
+                    {
+                        <div class="project-item" id="projectType_@(item.ProjectTypeId)">
+                            <div class="inner">
+                                <a href="/Projects/@item.Id/@item.Title.Replace("-", "").Replace("  ", " ").Replace(" ", "-")">
+                                    <div class="thumb data-effect-item has-effect-icon w40 offset-v-19 offset-h-49">
+                                        <img src="/Files/ProjectImages/Thumb/@item.Image" alt="@item.Title">
+                                        <div class="overlay-effect bg-color-3"></div>
+                                    </div>
+                                </a>
+                                <div class="text-wrap">
+                                    <h5 class="heading"><a href="/Projects/@item.Id/@item.Title.Replace("-", "").Replace("  ", " ").Replace(" ", "-")">@item.Title</a></h5>
+                                    <div class="elm-meta">
+                                        <span>@item.ProjectType.Title</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    }
+                </div>
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- END PROJECT -->

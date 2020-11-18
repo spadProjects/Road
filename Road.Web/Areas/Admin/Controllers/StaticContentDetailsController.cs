@@ -60,11 +60,12 @@ namespace Road.Web.Areas.Admin.Controllers
                     // Resizing Image
                     ImageResizer image = new ImageResizer();
                     if (staticContentDetail.StaticContentTypeId == (int)StaticContentTypes.Slider)
-                        image = new ImageResizer(1600,860);
+                        image = new ImageResizer(1900,1000,true);
                     if (staticContentDetail.StaticContentTypeId == (int)StaticContentTypes.AppreciationLetters)
-                        image = new ImageResizer(370, 215);
+                        image = new ImageResizer(370, 215,true);
                     if (staticContentDetail.StaticContentTypeId == (int)StaticContentTypes.AboutUs)
-                        image = new ImageResizer(770, 570);
+
+                        image = new ImageResizer(770, 570,true);
                     image.Resize(Server.MapPath("/Files/StaticContentImages/Temp/" + newFileName),
                         Server.MapPath("/Files/StaticContentImages/Image/" + newFileName));
 
@@ -127,7 +128,7 @@ namespace Road.Web.Areas.Admin.Controllers
                     ImageResizer image = new ImageResizer();
 
                     if (staticContentDetail.StaticContentTypeId == (int)StaticContentTypes.Slider)
-                        image = new ImageResizer(1600,860);
+                        image = new ImageResizer(1900, 1000);
                     if (staticContentDetail.StaticContentTypeId == (int)StaticContentTypes.AppreciationLetters)
                         image = new ImageResizer(370, 215);
                     if (staticContentDetail.StaticContentTypeId == (int)StaticContentTypes.AboutUs)

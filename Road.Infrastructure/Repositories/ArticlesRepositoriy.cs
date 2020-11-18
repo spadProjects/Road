@@ -25,9 +25,47 @@ namespace Road.Infrastructure.Repositories
         {
             return _context.Articles.Include(a=>a.User).Include(a=>a.ArticleCategory).Include(a=>a.ArticleHeadLines).FirstOrDefault(a=>a.Id == id);
         }
-        public List<Article> GetArticles()
+
+        public ArticleCategory GetArticleCategory(int categoryId)
         {
-            return _context.Articles.Where(a=>a.IsDeleted == false).Include(a => a.User).Include(a=>a.ArticleCategory).OrderBy(a=>a.InsertDate).ToList();
+            return _context.ArticleCategories.Find(categoryId);
+        }
+        public List<Article> GetArticlesByCategoryId(int categoryId,int? take = null)
+        {
+            var articles = new List<Article>();
+
+            if (take == null)
+                articles = _context.Articles.Where(a => a.IsDeleted == false && a.ArticleCategoryId == categoryId).Include(a => a.User).Include(a => a.ArticleCategory).OrderBy(a => a.AddedDate).ToList();
+            else
+                articles = _context.Articles.Where(a => a.IsDeleted == false && a.ArticleCategoryId == categoryId).Take(take.Value).Include(a => a.User).Include(a => a.ArticleCategory).OrderBy(a => a.InsertDate).ToList();
+
+            return articles;
+        }
+
+        public List<ArticleComment> GetArticleComments(int articleId)
+        {
+            return _context.ArticleComments.Where(c => c.IsDeleted == false && c.ArticleId == articleId).ToList();
+        }
+        public List<ArticleTag> GetArticleTags(int articleId)
+        {
+            return _context.ArticleTags.Where(c => c.IsDeleted == false && c.ArticleId == articleId).ToList();
+        }
+        public List<ArticleHeadLine> GetArticleHeadlines(int articleId)
+        {
+            return _context.ArticleHeadLines.Where(c => c.IsDeleted == false && c.ArticleId == articleId).ToList();
+        }
+        public List<Article> GetArticles(int? take = null)
+        {
+            var articles = new List<Article>();
+
+            if (take == null)
+                articles = _context.Articles.Where(a => a.IsDeleted == false).Include(a => a.User)
+                    .Include(a => a.ArticleCategory).OrderBy(a => a.AddedDate).ToList();
+            else
+                articles = _context.Articles.Where(a => a.IsDeleted == false).Take(take.Value).Include(a => a.User)
+                    .Include(a => a.ArticleCategory).OrderBy(a => a.AddedDate).ToList();
+
+            return articles;
         }
         public List<ArticleCategory> GetArticleCategories()
         {
@@ -84,6 +122,12 @@ namespace Road.Infrastructure.Repositories
         public List<Article> GetByCategory(int categoryId)
         {
             return _context.Articles.Where(a => a.IsDeleted == false && a.ArticleCategoryId == categoryId).Include(a => a.User).Include(a => a.ArticleCategory).OrderBy(a => a.InsertDate).ToList();
+        }
+
+        public void AddComment(ArticleComment comment)
+        {
+            _context.ArticleComments.Add(comment);
+            _context.SaveChanges();
         }
         //public Article DeleteArticle(int articleId)
         //{

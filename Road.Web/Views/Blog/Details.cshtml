@@ -1,0 +1,213 @@
+﻿@model Road.Web.ViewModels.ArticleDetailsViewModel
+@{
+    ViewBag.Title = Model.Title;
+    Layout = "/Views/Shared/_BlogLayout.cshtml";
+}
+<div id="inner-content" class="inner-content-wrap">
+    <article class="hentry data-effect">
+        <div class="post-media data-effect-item has-effect-icon offset-v-25 offset-h-24 clerafix">
+            <img src="/Files/ArticleImages/Image/@Model.Image" alt="@Model.Title">
+            <div class="post-calendar">
+                <span class="inner">
+                    <span class="entry-calendar">
+                        <span class="day">@Model.AddedDay</span>
+                        <span class="month">@Model.AddedMonth</span>
+                    </span>
+                </span>
+            </div>
+        </div><!-- /.post-media -->
+
+        <div class="post-content-wrap clearfix">
+            <h2 class="post-title">
+                <span class="post-title-inner">
+                    @Model.Title
+                </span>
+            </h2><!-- /.post-title -->
+            <div class="post-meta">
+                <div class="post-meta-content">
+                    <div class="post-meta-content-inner">
+                        <span class="post-date item"><span class="inner"><span class="entry-date">@Model.AddedMonth @Model.AddedDay, @Model.AddedYear</span></span></span>
+                        <span class="post-by-author item"><span class="inner">توسط: @Model.Author</span></span>
+                        <span class="comment item"><span class="inner">@Model.ArticleComments.Count نظر</span></span>
+                    </div>
+                </div>
+            </div><!-- /.post-meta -->
+            <div class="post-content post-excerpt margin-bottom-43">
+
+                <p class="line-height-27 no-margin letter-spacing-005">
+                    @Model.ShortDescription
+                </p>
+                @if (Model.HeadLines.Any())
+                {
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="themesflat-spacer clearfix" data-desktop="0" data-mobile="0" data-smobile="35" style="height:0px"></div>
+                            <div class="themesflat-content-box" data-margin="0 0 0 18px" data-mobilemargin="0 0 0 0" style="margin:0 0 0 0">
+                                <div class="themesflat-spacer clearfix" data-desktop="38" data-mobile="35" data-smobile="35" style="height:38px"></div>
+                                <div class="themesflat-accordions style-1 has-icon icon-left iconstyle-1 clearfix">
+                                    @foreach (var item in Model.HeadLines)
+                                    {
+                                        <div class="accordion-item">
+                                            <h3 class="accordion-heading"><span class="inner">@item.Title</span></h3>
+                                            <div class="accordion-content" style="display: none;">
+                                                <div>
+                                                    @Html.Raw(item.Description)
+                                                </div>
+                                            </div>
+                                        </div>
+                                    }
+                                </div><!-- /.themesflat-content-box -->
+                            </div><!-- /.col-md-6 -->
+                        </div><!-- /.row -->
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="themesflat-spacer clearfix" data-desktop="0" data-mobile="0" data-smobile="0" style="height:0px"></div>
+                            </div><!-- /.col-md-12 -->
+                        </div><!-- /.row -->
+                    </div>
+
+                }
+                <p class="line-height-27 no-margin letter-spacing-01" style="padding-top: 50px">
+                    @Html.Raw(Model.Description)
+                </p>
+            </div><!-- /.post-excerpt -->
+            <div class="post-tags-socials clearfix">
+                <div class="post-tags ">
+                    <span>برچسب ها :</span>
+                    @foreach (var item in Model.Tags)
+                    {
+                        <a href="/Blog?searchString=@item.Title">@item.Title</a>
+                    }
+                </div>
+                @*<div class="post-socials ">
+                        <a href="#" class="facebook"><span class="fa fa-facebook-square"></span></a>
+                        <a href="#" class="twitter"><span class="fa fa-twitter"></span></a>
+                        <a href="#" class="linkedin"><span class="fa fa-linkedin-square"></span></a>
+                        <a href="#" class="pinterest"><span class="fa fa-pinterest-p"></span></a>
+                    </div>*@
+            </div>
+
+        </div><!-- /.post-content-wrap -->
+    </article><!-- /.hentry -->
+    @*<div class="themesflat-pagination clearfix no-border padding-top-17">
+            <ul class="page-prev-next">
+                <li>
+                    <a href="#" class="prev">
+                        مقاله قبلی
+                    </a>
+                </li>
+                <li class="text-right">
+                    <a href="#" class="next">
+                        مقاله بعدی
+                    </a>
+                </li>
+            </ul>
+        </div>*@
+
+    <div id="comments" class="comments-area">
+        <h2 class="comments-title">@Model.ArticleComments.Count نظر</h2>
+        <ol class="comment-list">
+            @foreach (var item in Model.ArticleComments.Where(c => c.ParentId == null))
+            {
+                <li class="comment">
+                    <article class="comment-wrap clearfix">
+                        <div class="gravatar"><img alt="comment" src="/Files/user-avatar.png" /></div>
+                        <div class="comment-content">
+                            <div class="comment-meta">
+                                <h6 class="comment-author">@item.Name</h6>
+                                <span class="comment-time">@item.AddedDate</span>
+                                <span class="comment-reply" style="cursor: pointer"><a class="comment-reply-link" onclick="AnswerComment(@item.Id,'@item.Name')">پاسخ</a></span>
+                            </div>
+                            <div class="comment-text">
+                                <p>@item.Message</p>
+                            </div>
+                        </div>
+                    </article>
+                    <ul class="children">
+                        @foreach (var child in Model.ArticleComments.Where(c => c.ParentId == item.Id))
+                        {
+                            <li class="comment">
+                                <article class="comment-wrap clearfix">
+                                    <div class="gravatar"><img alt="comment" src="/Files/user-avatar.png" /></div>
+                                    <div class="comment-content">
+                                        <div class="comment-meta">
+                                            <h6 class="comment-author">@child.Name</h6>
+                                            <span class="comment-time">@child.AddedDate</span>
+                                        </div>
+                                        <div class="comment-text">
+                                            <p>@child.Message</p>
+                                        </div>
+                                    </div>
+                                </article>
+                            </li>
+
+                        }
+                    </ul>
+                </li>
+            }
+        </ol><!-- /.comment-list -->
+
+        <div id="respond" class="comment-respond">
+            <h4 id="answerPerson"></h4>
+            <h3 id="reply-title" class="comment-reply-title margin-bottom-31">پیام بگذارید</h3>
+            @using (Html.BeginForm("PostComment", "Blog", FormMethod.Post, new { id = "commentform", @class = "comment-form" }))
+            {
+                <input type="hidden" id="ArticleId" name="ArticleId" value="@Model.Id">
+                <input type="hidden" id="ParentId" name="ParentId" value="">
+                <div class="text-wrap clearfix">
+                    <fieldset class="name-wrap">
+                        <input type="text" id="Name" class="tb-my-input" name="Name" tabindex="1" placeholder="نام*" value="" size="32" aria-required="true">
+                    </fieldset>
+                    <fieldset class="email-wrap">
+                        <input type="email" id="Email" class="tb-my-input" name="Email" tabindex="2" placeholder="ایمیل*" value="" size="32" aria-required="true">
+                    </fieldset>
+                </div>
+                <fieldset class="message-wrap">
+                    <textarea id="Message" name="Message" rows="8" tabindex="4" placeholder="پیام*" aria-required="true"></textarea>
+                </fieldset>
+                <p class="wrap-submit">
+                    <input name="submit" type="submit" id="comment-reply" class="submit" value="ارسال">
+                </p>
+            }
+        </div><!-- #respond -->
+    </div><!--/#comments -->
+</div>
+<style>
+    .my-error-class {
+        color: #FF0000; /* red */
+    }
+</style>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script>
+        $("#commentform").validate({
+            errorClass: "my-error-class",
+            rules: {
+                Name: "required",
+                Message: "required",
+                Email: {
+                    required: true,
+                    email: true
+                }
+            },
+            messages: {
+                Name: "نام خود را وارد کنید",
+                Message: "پیام خود را وارد کنید",
+                Email: {
+                    required: "ایمیل خود را وارد کنید",
+                    email: "ایمیل وارد شده معتبر نیست"
+                },
+            }
+        });
+    </script>
+    <script>
+    function AnswerComment(parentId, parentName) {
+        $('#answerPerson').html("پاسخ دادن به   " + parentName +"<a class='btn btn-warning text-white' style='margin-right:10px;cursor:pointer' onclick='removePerson()'>حذف</a>");
+        $('#ParentId').val(parentId);
+            }
+    function removePerson() {
+        $('#answerPerson').html("");
+        $('#ParentId').val("");
+    }
+    </script>
+}

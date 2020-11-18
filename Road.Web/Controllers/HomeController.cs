@@ -19,13 +19,20 @@ namespace Road.Web.Controllers
         private readonly ProjectsRepository _projectRepo;
         private readonly PartnersRepository _partnerRepo;
         private readonly TestimonialsRepository _testimonialRepo;
-        public HomeController(StaticContentDetailsRepository contentRepo, FaqRepository faqRepo,ProjectsRepository projectRepo,PartnersRepository partnerRepo,TestimonialsRepository testimonialRepo)
+        private readonly ContactFormsRepository _contactFormRepo;
+        private readonly ArticleCategoriesRepository _articleCategoriesRepo;
+        private readonly OurTeamRepository _ourTeamRepo;
+
+        public HomeController(StaticContentDetailsRepository contentRepo, FaqRepository faqRepo,ProjectsRepository projectRepo,PartnersRepository partnerRepo,TestimonialsRepository testimonialRepo, ContactFormsRepository contactFormRepo, ArticleCategoriesRepository articleCategoriesRepo, OurTeamRepository ourTeamRepo)
         {
             _contentRepo = contentRepo;
             _faqRepo = faqRepo;
             _projectRepo = projectRepo;
             _partnerRepo = partnerRepo;
             _testimonialRepo = testimonialRepo;
+            _contactFormRepo = contactFormRepo;
+            _articleCategoriesRepo = articleCategoriesRepo;
+            _ourTeamRepo = ourTeamRepo;
         }
         public ActionResult Index()
         {
@@ -40,6 +47,13 @@ namespace Road.Web.Controllers
             var companyInfo = _contentRepo.GetContentByTypeId((int) StaticContentTypes.CompanyInfo);
             headerContent.AddRange(companyInfo);
             return PartialView(headerContent);
+        }
+
+        public ActionResult NavBar()
+        {
+            // Getting Article Categories For Navbar DropDown
+            var articleCategories = _articleCategoriesRepo.GetAll();
+            return PartialView(articleCategories);
         }
         public ActionResult HomeSlider()
         {
@@ -102,19 +116,73 @@ namespace Road.Web.Controllers
             AboutUs.AddRange(outstandingConstruction);
             var counters = _contentRepo.GetContentByTypeId((int)StaticContentTypes.Counter);
             AboutUs.AddRange(counters);
-
+            ViewBag.Phone = _contentRepo.GetAll().FirstOrDefault(s => s.Id == (int)StaticContents.Phone).ShortDescription;
+            #region BreadCrumb
+            var breadCrumbVm = new List<BreadCrumbViewModel>();
+            breadCrumbVm.Add(new BreadCrumbViewModel() { Title = "درباره ما", Href = "#" });
+            ViewBag.BreadCrumb = breadCrumbVm;
+            #endregion
             return View(AboutUs);
         }
-        //[Route("ContactUs")]
-        //public ActionResult Contact()
-        //{
-        //    var ContactUs = new List<StaticContentDetail>();
-        //    var contactUsContent = _contentRepo.GetContentByTypeId((int)StaticContentTypes.ContactUs).FirstOrDefault();
-        //    ContactUs.Add(contactUsContent);
-        //    var companyInfo = _contentRepo.GetContentByTypeId((int)StaticContentTypes.CompanyInfo);
-        //    headerContent.AddRange(companyInfo);
-        //    return View();
-        //}
+
+        public ActionResult OurTeam()
+        {
+            var ourTeam = _ourTeamRepo.GetAll();
+            ViewBag.Content = _contentRepo.GetAll().FirstOrDefault(s => s.Id == (int)StaticContents.OurTeam);
+            return PartialView(ourTeam);
+        }
+        [Route("ContactUs")]
+        public ActionResult Contact()
+        {
+            var ContactUs = new List<StaticContentDetail>();
+            var contactUsContent = _contentRepo.GetContentByTypeId((int)StaticContentTypes.ContactUs).FirstOrDefault();
+            ContactUs.Add(contactUsContent);
+            var companyInfo = _contentRepo.GetContentByTypeId((int)StaticContentTypes.CompanyInfo);
+            ContactUs.AddRange(companyInfo);
+            #region BreadCrumb
+            var breadCrumbVm = new List<BreadCrumbViewModel>();
+            breadCrumbVm.Add(new BreadCrumbViewModel() { Title = "تماس با ما", Href = "#" });
+            ViewBag.BreadCrumb = breadCrumbVm;
+            #endregion
+            return View(ContactUs);
+        }
+
+        public ActionResult ContactUsForm()
+        {
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult ContactUsForm(ContactForm contactForm)
+        {
+            if (ModelState.IsValid)
+            {
+                _contactFormRepo.Add(contactForm);
+                return RedirectToAction("ContactUsSummary");
+            }
+            return View(contactForm);
+        }
+
+        public ActionResult ContactUsSummary()
+        {
+            return View();
+        }
+        [Route("AboutFaradid/{id}/{name}")]
+        public ActionResult AboutFaradid(int id)
+        {
+            var content = _contentRepo.GetStaticContentDetail(id);
+            #region BreadCrumb
+            var breadCrumbVm = new List<BreadCrumbViewModel>();
+            breadCrumbVm.Add(new BreadCrumbViewModel() { Title = content.StaticContentType.Name, Href = "#" });
+            ViewBag.BreadCrumb = breadCrumbVm;
+            #endregion
+            return View(content);
+        }
+        public ActionResult Footer()
+        {
+            ViewBag.FooterText = _contentRepo.GetStaticContentDetail((int) StaticContents.Footer).ShortDescription;
+            var companyInfo = _contentRepo.GetContentByTypeId((int)StaticContentTypes.CompanyInfo);
+            return PartialView(companyInfo);
+        }
         public ActionResult UploadImage(HttpPostedFileBase upload, string CKEditorFuncNum, string CKEditor, string langCode)
         {
             string vImagePath = String.Empty;

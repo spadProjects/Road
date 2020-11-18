@@ -23,5 +23,19 @@ namespace Road.Infrastructure.Repositories
         {
             return _context.ProjectTypes.Where(a => a.IsDeleted == false).ToList();
         }
+
+        public Project GetProjectDetail(int id)
+        {
+            return _context.Projects.Include(p => p.ProjectType).FirstOrDefault(p => p.IsDeleted == false && p.Id == id);
+        }
+
+        public List<ProjectGallery> GetProjectGallery(int id)
+        {
+            return _context.ProjectGalleries.Where(g => g.ProjectId == id && g.IsDeleted == false).ToList();
+        }
+        public List<Project> GetProjectsByTypeId(int typeId)
+        {
+            return _context.Projects.Where(p => p.ProjectTypeId == typeId && p.IsDeleted == false).Include(p=>p.ProjectType).ToList();
+        }
     }
 }

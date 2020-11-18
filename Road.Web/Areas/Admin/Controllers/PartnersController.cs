@@ -38,7 +38,7 @@ namespace Road.Web.Areas.Admin.Controllers
                     var newFileName = Guid.NewGuid() + Path.GetExtension(PartnerImage.FileName);
                     PartnerImage.SaveAs(Server.MapPath("/Files/PartnersImages/Temp/" + newFileName));
                     // Resize Image
-                    ImageResizer image = new ImageResizer(400, 200);
+                    ImageResizer image = new ImageResizer(400, 200,true);
                     image.Resize(Server.MapPath("/Files/PartnersImages/Temp/" + newFileName),
                         Server.MapPath("/Files/PartnersImages/" + newFileName));
 
@@ -86,7 +86,7 @@ namespace Road.Web.Areas.Admin.Controllers
                     var newFileName = Guid.NewGuid() + Path.GetExtension(PartnerImage.FileName);
                     PartnerImage.SaveAs(Server.MapPath("/Files/PartnersImages/Temp/" + newFileName));
                     // Resize Image
-                    ImageResizer image = new ImageResizer(400, 200);
+                    ImageResizer image = new ImageResizer(400, 200,true);
                     image.Resize(Server.MapPath("/Files/PartnersImages/Temp/" + newFileName),
                         Server.MapPath("/Files/PartnersImages/" + newFileName));
 

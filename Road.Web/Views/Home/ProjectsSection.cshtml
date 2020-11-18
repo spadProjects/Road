@@ -23,17 +23,16 @@
                         {
                             <div class="project-item" id="projectType_@(item.ProjectTypeId)">
                                 <div class="inner">
-                                    <div class="thumb data-effect-item has-effect-icon w40 offset-v-19 offset-h-49">
-                                        <img src="/Files/ProjectImages/Thumb/@item.Image" alt="@item.Title">
-                                        @*<div class="elm-link">
-                                            <a href="#" class="icon-1 icon-search"></a>
-                                        </div>*@
-                                        <div class="overlay-effect bg-color-3"></div>
-                                    </div>
+                                    <a href="/Projects/@item.Id/@item.Title.Replace("-", "").Replace("  ", " ").Replace(" ", "-")">
+                                        <div class="thumb data-effect-item has-effect-icon w40 offset-v-19 offset-h-49">
+                                            <img src="/Files/ProjectImages/Thumb/@item.Image" alt="@item.Title">
+                                            <div class="overlay-effect bg-color-3"></div>
+                                        </div>
+                                    </a>
                                     <div class="text-wrap">
-                                        <h5 class="heading"><a href="#">@item.Title</a></h5>
+                                        <h5 class="heading"><a href="/Projects/@item.Id/@item.Title.Replace("-", "").Replace("  ", " ").Replace(" ", "-")">@item.Title</a></h5>
                                         <div class="elm-meta">
-                                            <span><a href="#">@item.ProjectType.Title</a></span>
+                                            <span>@item.ProjectType.Title</span>
                                         </div>
                                     </div>
                                 </div>

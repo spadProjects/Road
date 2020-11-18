@@ -1,17 +1,102 @@
-﻿@{
-    ViewBag.Title = "Contact";
+﻿@using Road.Core.Utility
+@model List<Road.Core.Models.StaticContentDetail>
+@{
+    ViewBag.Title = "تماس با ما";
+    var address = Model.FirstOrDefault(s => s.Id == (int)StaticContents.Address);
+    var phone = Model.FirstOrDefault(s => s.Id == (int)StaticContents.Phone);
+    var email = Model.FirstOrDefault(s => s.Id == (int)StaticContents.Email);
+    var contactUs = Model.FirstOrDefault(s => s.Id == (int)StaticContents.ContactUs);
 }
-<h2>@ViewBag.Title.</h2>
-<h3>@ViewBag.Message</h3>
+<!-- ICONBOX -->
+<div class="row-iconbox">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="themesflat-spacer clearfix" data-desktop="61" data-mobile="60" data-smobile="60"></div>
+                <div class="themesflat-headings style-1 text-center clearfix">
+                    <h2 class="heading">@contactUs.Title</h2>
+                    <div class="sep has-icon width-125 clearfix">
+                        <div class="sep-icon">
+                            <span class="sep-icon-before sep-center sep-solid"></span>
+                            <span class="icon-wrap"><i class="autora-icon-build"></i></span>
+                            <span class="sep-icon-after sep-center sep-solid"></span>
+                        </div>
+                    </div>
+                    <p class="sub-heading font-weight-400 max-width-770 line-height-26 margin-top-14">@contactUs.ShortDescription</p>
+                </div>
+                <div class="themesflat-spacer clearfix" data-desktop="45" data-mobile="35" data-smobile="35"></div>
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
 
-<address>
-    One Microsoft Way<br />
-    Redmond, WA 98052-6399<br />
-    <abbr title="Phone">P:</abbr>
-    425.555.0100
-</address>
+        <div class="row gutter-16">
+            <div class="col-md-4">
+                <div class="themesflat-icon-box icon-top align-center  accent-color style-3 bg-light-snow clearfix">
+                    <div class="icon-wrap">
+                        <i class="icon-phone"></i>
+                    </div>
+                    <div class="text-wrap">
+                        <h5 class="heading"><a href="#">@phone.ShortDescription</a></h5>
+                        <p class="sub-heading">@Html.Raw(phone.Description)</p>
+                        @*<span class="class more-link"><a href="#">با ما تماس بگیرید</a></span>*@
+                    </div>
+                </div><!-- /.themesflat-icon-box -->
+            </div><!-- /.col -->
+            <div class="col-md-4">
+                <div class="themesflat-spacer clearfix" data-desktop="0" data-mobile="0" data-smobile="35"></div>
+                <div class="themesflat-icon-box icon-top align-center accent-color style-3 bg-light-snow clearfix">
+                    <div class="icon-wrap">
+                        <i class="icon-map"></i>
+                    </div>
+                    <div class="text-wrap">
+                        <h5 class="heading"><a href="#">@address.ShortDescription</a></h5>
+                        <p class="sub-heading">@Html.Raw(address.Description)</p>
+                    </div>
+                </div><!-- /.themesflat-icon-box -->
+            </div><!-- /.col -->
+            <div class="col-md-4">
+                <div class="themesflat-spacer clearfix" data-desktop="0" data-mobile="0" data-smobile="35"></div>
+                <div class="themesflat-icon-box icon-top align-center accent-color style-3 bg-light-snow clearfix">
+                    <div class="icon-wrap">
+                        <i class="icon-envelope"></i>
+                    </div>
+                    <div class="text-wrap">
+                        <h5 class="heading"><a href="#">@email.ShortDescription</a></h5>
+                        <p class="sub-heading">@Html.Raw(email.Description)</p>
+                    </div>
+                </div><!-- /.themesflat-icon-box -->
+            </div><!-- /.col -->
+        </div><!-- /.row -->
 
-<address>
-    <strong>Support:</strong>   <a href="mailto:Support@example.com">Support@example.com</a><br />
-    <strong>Marketing:</strong> <a href="mailto:Marketing@example.com">Marketing@example.com</a>
-</address>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="themesflat-spacer clearfix" data-desktop="58" data-mobile="35" data-smobile="35"></div>
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div>
+<!-- END ICONBOX -->
+<!-- CONTACT -->
+<div class="row-contact">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="themesflat-contact-form style-2 w100 clearfix">
+                    @Html.Action("ContactUsForm")
+                </div><!-- /.themesflat-contact-form -->
+            </div><!-- /.col-md-6 -->
+            <div class="col-md-8">
+                <div class="themesflat-spacer clearfix" data-desktop="0" data-mobile="0" data-smobile="35"></div>
+                <div>@Html.Raw(contactUs.Description)</div>
+            </div><!-- /.col-md-6 -->
+        </div><!-- /.row -->
+        <div class="row">
+            <div class="col-md-12">
+                <div class="themesflat-spacer clearfix" data-desktop="81" data-mobile="60" data-smobile="60"></div>
+            </div><!-- /.col-md-12 -->
+        </div><!-- /.row -->
+    </div><!-- /.container -->
+</div>
+<!-- END CONTACT -->
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

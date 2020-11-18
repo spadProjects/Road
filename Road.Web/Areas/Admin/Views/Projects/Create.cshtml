@@ -68,6 +68,41 @@
                     @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control " } })
                     @Html.ValidationMessageFor(model => model.Description, "", new { @class = "form-text text-danger" })
                 </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Customer, new { })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Customer, new { htmlAttributes = new { @class = "form-control " } })
+                        @Html.ValidationMessageFor(model => model.Customer, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Budget, new { })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.Budget, new { htmlAttributes = new { @class = "form-control " } })
+                        @Html.ValidationMessageFor(model => model.Budget, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.SurfaceArea, new { })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.SurfaceArea, new { htmlAttributes = new { @class = "form-control " } })
+                        @Html.ValidationMessageFor(model => model.SurfaceArea, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.CompletedDate, new { })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.CompletedDate, new { htmlAttributes = new { @class = "form-control " } })
+                        @Html.ValidationMessageFor(model => model.CompletedDate, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstConsultant, new { })
+                    <div class="col-md-5">
+                        @Html.EditorFor(model => model.FirstConsultant, new { htmlAttributes = new { @class = "form-control " } })
+                        @Html.ValidationMessageFor(model => model.FirstConsultant, "", new { @class = "form-text text-danger" })
+                    </div>
+                </div>
             </div>
             <div class="card-footer">
                 <a href="@Url.Action("Index")" class="btn btn-secondary">انصراف</a>

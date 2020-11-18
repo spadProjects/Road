@@ -215,8 +215,10 @@
     <Compile Include="Areas\Admin\Controllers\TestimonialsController.cs" />
     <Compile Include="Areas\Admin\Controllers\UsersController.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\BlogController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProjectsController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -2340,6 +2342,7 @@
     <Content Include="Files\OurTeamImages\4d9a209d-f720-495a-b084-762464257766.png" />
     <Content Include="Files\PartnersImages\1491125a-3cfd-42e0-a915-ef30c9084a29.png" />
     <Content Include="Files\PartnersImages\8b7cf755-145e-4974-a427-7af5f78538d9.png" />
+    <Content Include="Files\user-avatar.png" />
     <Content Include="Files\UserAvatars\3cf0f330-af46-43b4-8f6d-578af670e801.jpg" />
     <Content Include="Files\UserAvatars\5e15f24a-0f87-470f-bcda-1ad269195bf8.png" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
@@ -4806,11 +4809,27 @@
     <Content Include="Views\Home\PartnersSection.cshtml" />
     <Content Include="Views\Home\TestimonialsSection.cshtml" />
     <Content Include="Views\Shared\_HomeLayout.cshtml" />
+    <Content Include="Views\Shared\_PartialFooter.cshtml" />
+    <Content Include="Views\Home\ContactUsForm.cshtml" />
+    <Content Include="Views\Home\ContactUsSummary.cshtml" />
+    <Content Include="Views\Projects\Index.cshtml" />
+    <Content Include="Views\Projects\Details.cshtml" />
+    <Content Include="Views\Home\AboutFaradid.cshtml" />
+    <Content Include="Views\Blog\Index.cshtml" />
+    <Content Include="Views\Shared\_PartialNavbar.cshtml" />
+    <Content Include="Views\Shared\_BlogLayout.cshtml" />
+    <Content Include="Views\Blog\LatestPosts.cshtml" />
+    <Content Include="Views\Blog\SearchArticle.cshtml" />
+    <Content Include="Views\Home\NavBar.cshtml" />
+    <Content Include="Views\Blog\Details.cshtml" />
+    <Content Include="Views\Home\OurTeam.cshtml" />
+    <Content Include="Views\Home\Footer.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Areas\Admin\Models\" />
     <Folder Include="Files\ArticleImages\Temp\" />
+    <Folder Include="Files\OurTeamImages\Temp\" />
     <Folder Include="Files\PartnersImages\Temp\" />
     <Folder Include="Files\ProjectImages\Image\" />
     <Folder Include="Files\ProjectImages\ProjectGallery\" />

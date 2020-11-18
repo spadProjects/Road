@@ -1,0 +1,33 @@
+﻿@model Road.Core.Models.ContactForm
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "form", @class = "contact-form wpcf7-form" }))
+{
+    @*<div class="form-group">
+            @Html.LabelFor(model => model.Name, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Name, "", new { @class = "text-danger" })
+            </div>
+        </div>*@
+    <span class="wpcf7-form-control-wrap your-name">
+        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "wpcf7-form-control", placeholder = "نام*" } })
+        @Html.ValidationMessageFor(model => model.Name, "", new {@class = "text-danger"})
+    </span>
+    <span class="wpcf7-form-control-wrap your-email">
+        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "wpcf7-form-control", placeholder = "ایمیل*" } })
+        @Html.ValidationMessageFor(model => model.Email, "", new {@class = "text-danger"})
+    </span>
+    <span class="wpcf7-form-control-wrap your-phone">
+        @Html.EditorFor(model => model.Phone, new { htmlAttributes = new { @class = "wpcf7-form-control", placeholder = "تلفن*" } })
+        @Html.ValidationMessageFor(model => model.Phone, "", new { @class = "text-danger" })
+    </span>
+    <span class="wpcf7-form-control-wrap your-message">
+        @Html.EditorFor(model => model.Message, new { htmlAttributes = new { @class = "wpcf7-form-control", placeholder = "پیام*" } })
+        @Html.ValidationMessageFor(model => model.Message, "", new {@class = "text-danger"})
+    </span>
+    <span class="wrap-submit">
+        <input type="submit" value="ارسال" class="submit wpcf7-form-control wpcf7-submit" id="submit" name="ارسال">
+    </span>
+}
+<script>
+    $.validator.unobtrusive.parse("#form");
+</script>

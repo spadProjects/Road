@@ -16,7 +16,8 @@ namespace Road.Core.Utility
         Testimonials = 1009,
         Faq = 1010,
         AboutUs = 1011,
-        Counter = 1012
+        Counter = 1012,
+        ContactUs = 1013
     }
     public enum StaticContents
     {
@@ -29,14 +30,10 @@ namespace Road.Core.Utility
         BestQuality = 21,
         OnTime = 22,
         Experienced = 23,
-        About = 26
-    }
-    public enum ArticleCategories
-    {
-        Facebook = 3,
-        Telegram = 4,
-        Instagram = 5,
-        Address = 11,
-        Phone = 12,
+        About = 26,
+        Email = 31,
+        ContactUs = 32,
+        OurTeam = 35,
+        Footer = 36
     }
 }

@@ -37,7 +37,7 @@ namespace Road.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(Project project, HttpPostedFileBase ProjectImage, string Tags)
+        public ActionResult Create(Project project, HttpPostedFileBase ProjectImage)
         {
             if (ModelState.IsValid)
             {
@@ -48,11 +48,11 @@ namespace Road.Web.Areas.Admin.Controllers
                     var newFileName = Guid.NewGuid() + Path.GetExtension(ProjectImage.FileName);
                     ProjectImage.SaveAs(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName));
                     // Resize Image
-                    ImageResizer image = new ImageResizer(840, 385);
+                    ImageResizer image = new ImageResizer(840, 385,true);
                     image.Resize(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName),
                         Server.MapPath("/Files/ProjectImages/Image/" + newFileName));
 
-                    ImageResizer thumb = new ImageResizer(400, 250);
+                    ImageResizer thumb = new ImageResizer(400, 250,true);
                     thumb.Resize(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName),
                         Server.MapPath("/Files/ProjectImages/Thumb/" + newFileName));
 
@@ -66,7 +66,6 @@ namespace Road.Web.Areas.Admin.Controllers
                 _repo.Add(project);
                 return RedirectToAction("Index");
             }
-            ViewBag.Tags = Tags;
             ViewBag.ProjectTypeId = new SelectList(_repo.GetProjectTypes(), "Id", "Title", project.ProjectTypeId);
             return View(project);
         }
@@ -89,7 +88,7 @@ namespace Road.Web.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(Project project, HttpPostedFileBase ProjectImage, string Tags)
+        public ActionResult Edit(Project project, HttpPostedFileBase ProjectImage)
         {
             if (ModelState.IsValid)
             {
@@ -106,11 +105,11 @@ namespace Road.Web.Areas.Admin.Controllers
                     var newFileName = Guid.NewGuid() + Path.GetExtension(ProjectImage.FileName);
                     ProjectImage.SaveAs(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName));
                     // Resize Image
-                    ImageResizer image = new ImageResizer(840, 385);
+                    ImageResizer image = new ImageResizer(840, 385,true);
                     image.Resize(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName),
                         Server.MapPath("/Files/ProjectImages/Image/" + newFileName));
 
-                    ImageResizer thumb = new ImageResizer(370, 250);
+                    ImageResizer thumb = new ImageResizer(370, 250,true);
                     thumb.Resize(Server.MapPath("/Files/ProjectImages/Temp/" + newFileName),
                         Server.MapPath("/Files/ProjectImages/Thumb/" + newFileName));
 
@@ -124,7 +123,6 @@ namespace Road.Web.Areas.Admin.Controllers
                 _repo.Update(project);
                 return RedirectToAction("Index");
             }
-            ViewBag.Tags = Tags;
             ViewBag.ProjectTypeId = new SelectList(_repo.GetProjectTypes(), "Id", "Title", project.ProjectTypeId);
             return View(project);
         }

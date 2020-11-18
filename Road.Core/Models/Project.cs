@@ -24,6 +24,21 @@ namespace Road.Core.Models
         [DataType(DataType.MultilineText)]
         [AllowHtml]
         public string Description { get; set; }
+        [Display(Name = "مشتری")]
+        [MaxLength(600, ErrorMessage = "{0} باید از 600 کارکتر کمتر باشد")]
+        public string Customer { get; set; }
+        [Display(Name = "بودجه")]
+        [MaxLength(600, ErrorMessage = "{0} باید از 600 کارکتر کمتر باشد")]
+        public string Budget { get; set; }
+        [Display(Name = "منطقه سطح")]
+        [MaxLength(600, ErrorMessage = "{0} باید از 600 کارکتر کمتر باشد")]
+        public string SurfaceArea { get; set; }
+        [Display(Name = "تاریخ تکمیل")]
+        [MaxLength(600, ErrorMessage = "{0} باید از 600 کارکتر کمتر باشد")]
+        public string CompletedDate { get; set; }
+        [Display(Name = "نخستین مشاور")]
+        [MaxLength(600, ErrorMessage = "{0} باید از 600 کارکتر کمتر باشد")]
+        public string FirstConsultant { get; set; }
         [Display(Name = "تصویر")]
         public string Image { get; set; }
         public int? ProjectTypeId { get; set; }

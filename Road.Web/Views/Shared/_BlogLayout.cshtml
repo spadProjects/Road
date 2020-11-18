@@ -1,0 +1,125 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en-US" lang="en-US">
+<head>
+    <meta charset="utf-8">
+    <title>فرادید کرمان | @ViewBag.Title</title>
+
+    <meta name="author" content="themesflat.com">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <link rel="stylesheet" type="text/css" href="/Content/client/style.css">
+    <link rel="stylesheet" type="text/css" href="/Content/client/assets/css/colors/color1.css" id="colors">
+    <link rel="shortcut icon" href="/Content/client/assets/icon/favicon.png">
+    <link rel="apple-touch-icon-precomposed" href="/Content/client/assets/icon/apple-touch-icon-158-precomposed.png">
+    <!--[if lt IE 9]>
+        <script src="javascript/html5shiv.js"></script>
+        <script src="javascript/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+
+<body class="header-fixed sidebar-right header-style-1 topbar-style-1 menu-has-search">
+
+    <div id="wrapper" class="animsition">
+        <div id="page" class="clearfix">
+            @Html.Action("Header", "Home")
+            @Html.Action("NavBar", "Home")
+            @if (ViewBag.BreadCrumb != null)
+            {
+                <div id="featured-title" class="featured-title clearfix">
+                    <div id="featured-title-inner" class="container clearfix">
+                        <div class="featured-title-inner-wrap">
+                            <div id="breadcrumbs">
+                                <div class="breadcrumbs-inner">
+                                    <div class="breadcrumb-trail">
+                                        <a href="/" class="trail-begin">صفحه اصلی</a>
+                                        <span class="sep">|</span>
+                                        @for (int i = 0; i < ViewBag.BreadCrumb.Count; i++)
+                                        {
+                                            if (i+1 < ViewBag.BreadCrumb.Count)
+                                            {
+                                                <a href="@ViewBag.BreadCrumb[i].Href" class="trail-begin">@ViewBag.BreadCrumb[i].Title</a>
+                                                <span class="sep">|</span>
+                                            }
+                                            else
+                                            {
+                                                <span class="trail-end">@ViewBag.BreadCrumb[i].Title</span>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="featured-title-heading-wrap">
+                                <h1 class="feautured-title-heading">
+                                    @ViewBag.BreadCrumb[ViewBag.BreadCrumb.Count-1].Title
+                                </h1>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            }
+            <div id="main-content" class="site-main clearfix">
+                <div id="content-wrap" class="container">
+                    <div id="site-content" class="site-content clearfix">
+                        @RenderBody()
+                    </div><!-- /#site-content -->
+                    <div id="sidebar">
+                        <div class="themesflat-spacer clearfix" data-desktop="0" data-mobile="60" data-smobile="60"></div>
+                        <div id="inner-sidebar" class="inner-content-wrap">
+                            <div class="widget widget_search">
+                                <form action="/Blog" method="get" role="search" class="search-form style-1">
+                                    <input type="search" class="search-field" placeholder="جستجو..." value="" name="searchString" title="جستجو برای">
+                                    <button class="search-submit" type="submit" title="جستجو">Search</button>
+                                </form>
+                            </div><!-- /.widget_search -->
+
+                            <div class="widget widget_lastest">
+                                <h2 class="widget-title"><span>پست های اخیر</span></h2>
+                                @Html.Action("LatestPosts", "Blog", new { take = 3 })
+                            </div><!-- /.widget_lastest -->
+                        </div>
+                    </div><!-- /#sidebar -->
+                </div><!-- /#content-wrap -->
+            </div><!-- /#main-content -->
+            @Html.Action("Footer","Home")
+        </div><!-- /#page -->
+    </div><!-- /#wrapper -->
+
+    <a id="scroll-top"></a>
+
+    <!-- Javascript -->
+    <script src="/Content/client/assets/js/jquery.min.js"></script>
+    <script src="/Content/client/assets/js/plugins.js"></script>
+    <script src="/Content/client/assets/js/tether.min.js"></script>
+    <script src="/Content/client/assets/js/bootstrap.min.js"></script>
+    <script src="/Content/client/assets/js/animsition.js"></script>
+    <script src="/Content/client/assets/js/owl.carousel.min.js"></script>
+    <script src="/Content/client/assets/js/countto.js"></script>
+    <script src="/Content/client/assets/js/equalize.min.js"></script>
+    <script src="/Content/client/assets/js/jquery.isotope.min.js"></script>
+    <script src="/Content/client/assets/js/owl.carousel2.thumbs.js"></script>
+
+    <script src="/Content/client/assets/js/jquery.cookie.js"></script>
+    <script src="/Content/client/assets/js/gmap3.min.js"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAIEU6OT3xqCksCetQeNLIPps6-AYrhq-s&region=GB"></script>
+    <script src="/Content/client/assets/js/shortcodes.js"></script>
+    <script src="/Content/client/assets/js/main.js"></script>
+
+    <!-- Revolution Slider -->
+    <script src="/Content/client/includes/rev-slider/js/jquery.themepunch.tools.min.js"></script>
+    <script src="/Content/client/includes/rev-slider/js/jquery.themepunch.revolution.min.js"></script>
+    <script src="/Content/client/assets/js/rev-slider.js"></script>
+    <!-- Load Extensions only on Local File Systems ! The following part can be removed on Server for On Demand Loading -->
+    <script src="/Content/client/includes/rev-slider/js/extensions/revolution.extension.actions.min.js"></script>
+    <script src="/Content/client/includes/rev-slider/js/extensions/revolution.extension.carousel.min.js"></script>
+    <script src="/Content/client/includes/rev-slider/js/extensions/revolution.extension.kenburn.min.js"></script>
+    <script src="/Content/client/includes/rev-slider/js/extensions/revolution.extension.layeranimation.min.js"></script>
+    <script src="/Content/client/includes/rev-slider/js/extensions/revolution.extension.migration.min.js"></script>
+    <script src="/Content/client/includes/rev-slider/js/extensions/revolution.extension.navigation.min.js"></script>
+    <script src="/Content/client/includes/rev-slider/js/extensions/revolution.extension.parallax.min.js"></script>
+    <script src="/Content/client/includes/rev-slider/js/extensions/revolution.extension.slideanims.min.js"></script>
+    <script src="/Content/client/includes/rev-slider/js/extensions/revolution.extension.video.min.js"></script>
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+

@@ -17,7 +17,14 @@ namespace Road.Web
             routes.MapRoute(
                 name: "Default",
                 url: "{controller}/{action}/{id}",
-                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional }
+                defaults: new { controller = "Home", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "Road.Web.Controllers" }
+            );
+            routes.MapRoute(
+                name: "Admin",
+                url: "Admin/{controller}/{action}/{id}",
+                defaults: new {area="Admin", controller = "Dashboard", action = "Index", id = UrlParameter.Optional },
+                namespaces: new[] { "Road.Web.Areas.Admin.Admin.Controllers" }
             );
         }
     }

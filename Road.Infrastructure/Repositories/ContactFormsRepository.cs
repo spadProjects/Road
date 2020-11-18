@@ -19,7 +19,7 @@ namespace Road.Infrastructure.Repositories
         }
         public ContactForm GetContactForm(int id)
         {
-            return _context.ContactForms.Include(c => c.Service).FirstOrDefault(c=>c.Id == id);
+            return _context.ContactForms.FirstOrDefault(c=>c.Id == id);
         }
         public List<Service> GetServices()
         {

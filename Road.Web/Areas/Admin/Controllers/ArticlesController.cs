@@ -63,11 +63,11 @@ namespace Road.Web.Areas.Admin.Controllers
                     var newFileName = Guid.NewGuid() + Path.GetExtension(ArticleImage.FileName);
                     ArticleImage.SaveAs(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName));
                     // Resize Image
-                    ImageResizer image = new ImageResizer(840, 385);
+                    ImageResizer image = new ImageResizer(850, 400, true);
                     image.Resize(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName),
                         Server.MapPath("/Files/ArticleImages/Image/" + newFileName));
 
-                    ImageResizer thumb = new ImageResizer(370,215);
+                    ImageResizer thumb = new ImageResizer(200, 200, true);
                     thumb.Resize(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName),
                         Server.MapPath("/Files/ArticleImages/Thumb/" + newFileName));
 
@@ -126,16 +126,17 @@ namespace Road.Web.Areas.Admin.Controllers
                     var newFileName = Guid.NewGuid() + Path.GetExtension(ArticleImage.FileName);
                     ArticleImage.SaveAs(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName));
                     // Resize Image
-                    ImageResizer image = new ImageResizer(840, 385);
+                    ImageResizer image = new ImageResizer(850, 400,true);
                     image.Resize(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName),
                         Server.MapPath("/Files/ArticleImages/Image/" + newFileName));
 
-                    ImageResizer thumb = new ImageResizer(370, 215);
+                    ImageResizer thumb = new ImageResizer(200, 200,true);
                     thumb.Resize(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName),
                         Server.MapPath("/Files/ArticleImages/Thumb/" + newFileName));
 
                     // Deleting Temp Image
                     System.IO.File.Delete(Server.MapPath("/Files/ArticleImages/Temp/" + newFileName));
+                    article.Image = newFileName;
                 }
                 #endregion
 
