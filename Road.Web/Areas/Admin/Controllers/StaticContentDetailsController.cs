@@ -38,7 +38,7 @@ namespace Road.Web.Areas.Admin.Controllers
             var appreciationLetter = _repo.GetStaticContentTypes().FirstOrDefault(a => a.Id == (int)StaticContentTypes.AppreciationLetters);
             availableTypes.Add(slider);
             availableTypes.Add(appreciationLetter);
-            availableTypes.AddRange(_repo.GetStaticContentTypes());
+            //availableTypes.AddRange(_repo.GetStaticContentTypes());
             #endregion
             ViewBag.StaticContentTypeId = new SelectList(availableTypes, "Id", "Name");
             return View();

@@ -17,7 +17,7 @@ namespace Road.Infrastructure.Repositories
         }
         public List<Project> GetProjects()
         {
-            return _context.Projects.Include(p => p.ProjectType).Where(p => p.IsDeleted == false).OrderBy(a => a.InsertDate).ToList();
+            return _context.Projects.Include(p => p.ProjectType).Where(p => p.IsDeleted == false).OrderByDescending(a => a.InsertDate).ToList();
         }
         public List<ProjectType> GetProjectTypes()
         {

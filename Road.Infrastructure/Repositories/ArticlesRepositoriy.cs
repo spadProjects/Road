@@ -35,9 +35,9 @@ namespace Road.Infrastructure.Repositories
             var articles = new List<Article>();
 
             if (take == null)
-                articles = _context.Articles.Where(a => a.IsDeleted == false && a.ArticleCategoryId == categoryId).Include(a => a.User).Include(a => a.ArticleCategory).OrderBy(a => a.AddedDate).ToList();
+                articles = _context.Articles.Where(a => a.IsDeleted == false && a.ArticleCategoryId == categoryId).Include(a => a.User).Include(a => a.ArticleCategory).OrderByDescending(a => a.AddedDate).ToList();
             else
-                articles = _context.Articles.Where(a => a.IsDeleted == false && a.ArticleCategoryId == categoryId).Take(take.Value).Include(a => a.User).Include(a => a.ArticleCategory).OrderBy(a => a.InsertDate).ToList();
+                articles = _context.Articles.Where(a => a.IsDeleted == false && a.ArticleCategoryId == categoryId).Take(take.Value).Include(a => a.User).Include(a => a.ArticleCategory).OrderByDescending(a => a.AddedDate).ToList();
 
             return articles;
         }
@@ -60,10 +60,10 @@ namespace Road.Infrastructure.Repositories
 
             if (take == null)
                 articles = _context.Articles.Where(a => a.IsDeleted == false).Include(a => a.User)
-                    .Include(a => a.ArticleCategory).OrderBy(a => a.AddedDate).ToList();
+                    .Include(a => a.ArticleCategory).OrderByDescending(a => a.AddedDate).ToList();
             else
                 articles = _context.Articles.Where(a => a.IsDeleted == false).Take(take.Value).Include(a => a.User)
-                    .Include(a => a.ArticleCategory).OrderBy(a => a.AddedDate).ToList();
+                    .Include(a => a.ArticleCategory).OrderByDescending(a => a.AddedDate).ToList();
 
             return articles;
         }
@@ -121,12 +121,19 @@ namespace Road.Infrastructure.Repositories
         }
         public List<Article> GetByCategory(int categoryId)
         {
-            return _context.Articles.Where(a => a.IsDeleted == false && a.ArticleCategoryId == categoryId).Include(a => a.User).Include(a => a.ArticleCategory).OrderBy(a => a.InsertDate).ToList();
+            return _context.Articles.Where(a => a.IsDeleted == false && a.ArticleCategoryId == categoryId).Include(a => a.User).Include(a => a.ArticleCategory).OrderByDescending(a => a.AddedDate).ToList();
         }
 
         public void AddComment(ArticleComment comment)
         {
             _context.ArticleComments.Add(comment);
+            _context.SaveChanges();
+        }
+        public void UpdateArticleViewCount(int articleId)
+        {
+            var article = _context.Articles.Find(articleId);
+            article.ViewCount++;
+            _context.Entry(article).State = EntityState.Modified;
             _context.SaveChanges();
         }
         //public Article DeleteArticle(int articleId)

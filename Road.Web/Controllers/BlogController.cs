@@ -100,6 +100,7 @@ namespace Road.Web.Controllers
         [Route("Blog/Details/{id}")]
         public ActionResult Details(int id)
         {
+            _repo.UpdateArticleViewCount(id);
             var article = _repo.GetArticle(id);
             var articleDetailsVm = new ArticleDetailsViewModel(article);
             var articleComments = _repo.GetArticleComments(id);

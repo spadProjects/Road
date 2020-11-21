@@ -45,11 +45,13 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Kendo.Mvc">
-      <HintPath>..\..\Kendo.Mvc.dll</HintPath>
+    <Reference Include="Kendo.Mvc, Version=2020.1.114.545, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Kendo.Mvc.dll</HintPath>
     </Reference>
-    <Reference Include="Kendo.Mvc.Export">
-      <HintPath>..\..\Kendo.Mvc.Export.dll</HintPath>
+    <Reference Include="Kendo.Mvc.Export, Version=2020.1.114.40, Culture=neutral, PublicKeyToken=121fae78165ba3d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\Library\Kendo.Mvc.Export.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.AspNet.Identity.Core, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.AspNet.Identity.Core.2.2.3\lib\net45\Microsoft.AspNet.Identity.Core.dll</HintPath>
